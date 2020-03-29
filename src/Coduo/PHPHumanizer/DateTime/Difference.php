@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the PHP Humanizer Library.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Coduo\PHPHumanizer\DateTime;
 
 use Coduo\PHPHumanizer\DateTime\Unit\Day;
@@ -59,7 +68,7 @@ final class Difference
     private function calculate()
     {
         /* @var $units \Coduo\PHPHumanizer\DateTime\Unit[] */
-        $units = array(
+        $units = [
             new Year(),
             new Month(),
             new Week(),
@@ -68,9 +77,9 @@ final class Difference
             new Minute(),
             new Second(),
             new JustNow(),
-        );
+        ];
 
-        $absoluteMilliSecondsDiff = abs($this->toDate->getTimestamp() - $this->fromDate->getTimestamp()) * 1000;
+        $absoluteMilliSecondsDiff = \abs($this->toDate->getTimestamp() - $this->fromDate->getTimestamp()) * 1000;
         foreach ($units as $unit) {
             if ($absoluteMilliSecondsDiff >= $unit->getMilliseconds()) {
                 $this->unit = $unit;
@@ -80,7 +89,7 @@ final class Difference
 
         $this->quantity = ($absoluteMilliSecondsDiff == 0)
             ? $absoluteMilliSecondsDiff
-            : (int) round($absoluteMilliSecondsDiff / $this->unit->getMilliseconds());
+            : (int) \round($absoluteMilliSecondsDiff / $this->unit->getMilliseconds());
     }
 
     public function isPast()

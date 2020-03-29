@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the PHP Humanizer Library.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Coduo\PHPHumanizer;
 
 use Coduo\PHPHumanizer\String\Humanize;
@@ -18,7 +27,7 @@ final class StringHumanizer
      *
      * @return string
      */
-    public static function humanize($text, $capitalize = true, $separator = '_', array $forbiddenWords = array())
+    public static function humanize($text, $capitalize = true, $separator = '_', array $forbiddenWords = [])
     {
         return (string) new Humanize($text, $capitalize, $separator, $forbiddenWords);
     }
@@ -58,10 +67,10 @@ final class StringHumanizer
      */
     public static function removeShortcodes($text)
     {
-        if (!class_exists('Thunder\Shortcode\Processor\Processor')) {
-            throw new \RuntimeException("Please add \"thunderer/shortcode\": ~0.5 to composer.json first");
+        if (!\class_exists('Thunder\Shortcode\Processor\Processor')) {
+            throw new \RuntimeException('Please add "thunderer/shortcode": ^0.7 to composer.json first');
         }
-        
+
         $processor = new ShortcodeProcessor();
 
         return $processor->removeShortcodes($text);
@@ -73,10 +82,10 @@ final class StringHumanizer
      */
     public static function removeShortcodeTags($text)
     {
-        if (!class_exists('Thunder\Shortcode\Processor\Processor')) {
-            throw new \RuntimeException("Please add \"thunderer/shortcode\": ~0.5 to composer.json first");
+        if (!\class_exists('Thunder\Shortcode\Processor\Processor')) {
+            throw new \RuntimeException('Please add "thunderer/shortcode": ^0.7 to composer.json first');
         }
-        
+
         $processor = new ShortcodeProcessor();
 
         return $processor->removeShortcodeTags($text);

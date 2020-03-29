@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the PHP Humanizer Library.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Coduo\PHPHumanizer\String;
 
 final class MetricSuffix
@@ -19,14 +28,14 @@ final class MetricSuffix
     /**
      * @var array
      */
-    private $binaryPrefixes = array(
+    private $binaryPrefixes = [
         1000000000000000 => '#.##P',
         1000000000000 => '#.##T',
         1000000000 => '#.##G',
         1000000 => '#.##M',
         1000 => '#.#k',
         0 => '#.#',
-    );
+    ];
 
     /**
      * @param $number
@@ -36,7 +45,11 @@ final class MetricSuffix
      */
     public function __construct($number, $locale = 'en')
     {
-        if (!is_numeric($number)) {
+        if (!\class_exists('NumberFormatter')) {
+            throw new \RuntimeException('Metric suffix converter requires intl extension!');
+        }
+
+        if (!\is_numeric($number)) {
             throw new \InvalidArgumentException('Metric suffix converter accept only numeric values.');
         }
 
@@ -47,7 +60,7 @@ final class MetricSuffix
          * Workaround for 32-bit systems which ignore array ordering when
          * dropping values over 2^32-1
          */
-        krsort($this->binaryPrefixes);
+        \krsort($this->binaryPrefixes);
     }
 
     public function convert()

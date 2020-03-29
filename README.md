@@ -1,14 +1,23 @@
-#PHP Humanizer
+# PHP Humanizer
 
-[![Build Status](https://travis-ci.org/coduo/php-humanizer.svg?branch=master)](https://travis-ci.org/coduo/php-humanizer)
+[![Build Status](https://travis-ci.com/coduo/php-humanizer.svg?branch=master)](https://travis-ci.com/coduo/php-humanizer)
 [![Latest Stable Version](https://poser.pugx.org/coduo/php-humanizer/v/stable)](https://packagist.org/packages/coduo/php-humanizer)
 [![Total Downloads](https://poser.pugx.org/coduo/php-humanizer/downloads)](https://packagist.org/packages/coduo/php-humanizer)
 [![Latest Unstable Version](https://poser.pugx.org/coduo/php-humanizer/v/unstable)](https://packagist.org/packages/coduo/php-humanizer)
 [![License](https://poser.pugx.org/coduo/php-humanizer/license)](https://packagist.org/packages/coduo/php-humanizer)
 
+### Tests
+* [![Build Status](https://travis-ci.com/coduo/php-humanizer.svg?branch=master)](https://travis-ci.com/coduo/php-humanizer) - master (3.1)
+* [![Build Status](https://travis-ci.com/coduo/php-humanizer.svg?branch=3.0)](https://travis-ci.com/coduo/php-humanizer) - 3.0
+
+[Readme for master (3.1) version](https://github.com/coduo/php-humanizer/tree/master/README.md)  
+[Readme for 3.0 version](https://github.com/coduo/php-humanizer/tree/3.0/README.md)  
+
+
+
 Humanize values to make them readable for regular people ;)
 
-#Installation
+# Installation
 
 Run the following command:
 
@@ -16,7 +25,7 @@ Run the following command:
 composer require coduo/php-humanizer
 ```
 
-#Usage
+# Usage
 
 ## Text
 
@@ -60,6 +69,14 @@ StringHumanizer::truncateHtml($text, 12, ''); // "HyperText Markup"
 StringHumanizer::truncateHtml($text, 50, '', '...'); // "HyperText Markup Language, commonly referred to as..."
 StringHumanizer::truncateHtml($text, 75, '<b><i><u><em><strong><a><span>', '...'); // '<b>HyperText Markup Language</b>, commonly referred to as <b>HTML</b>, is the standard <a href="/wiki/Markup_language" title="Markup language">markup...</a>'
 
+```
+
+**Remove shortcodes**
+
+```php
+$text = 'A text with [short]random[/short] [codes]words[/codes].';
+StringHumanizer::removeShortcodes($text); // "A text with ."
+StringHumanizer::removeShortcodeTags($text); // "A text with random words."
 ```
 
 ## Number
@@ -232,15 +249,44 @@ Currently we support following languages:
 * [Dutch](src/Coduo/PHPHumanizer/Resources/translations/difference.nl.yml)
 * [Русский](src/Coduo/PHPHumanizer/Resources/translations/difference.ru.yml)
 * [Norwegian](src/Coduo/PHPHumanizer/Resources/translations/difference.no.yml)
-* [Afrikaans] (src/Coduo/PHPHumanizer/Resources/translations/difference.af.yml)
-* [Bulgarian] (src/Coduo/PHPHumanizer/Resources/translations/difference.bg.yml)
-* [Indonesian] (src/Coduo/PHPHumanizer/Resources/translations/difference.id.yml)
-* [Chinese Simplified] (src/Coduo/PHPHumanizer/Resources/translations/difference.zh_CN.yml)
-* [Spanish] (src/Coduo/PHPHumanizer/Resources/translations/difference.es.yml)
-* [Ukrainian] (src/Coduo/PHPHumanizer/Resources/translations/difference.uk.yml)
-* [Danish] (src/Coduo/PHPHumanizer/Resources/translations/difference.da.yml)
-* [Thai] (src/Coduo/PHPHumanizer/Resources/translations/difference.th.yml)
-* [Japanese] (src/Coduo/PHPHumanizer/Resources/translations/difference.ja.yml)
+* [Afrikaans](src/Coduo/PHPHumanizer/Resources/translations/difference.af.yml)
+* [Bulgarian](src/Coduo/PHPHumanizer/Resources/translations/difference.bg.yml)
+* [Indonesian](src/Coduo/PHPHumanizer/Resources/translations/difference.id.yml)
+* [Chinese Simplified](src/Coduo/PHPHumanizer/Resources/translations/difference.zh_CN.yml)
+* [Chinese Taiwan](src/Coduo/PHPHumanizer/Resources/translations/difference.zh_TW.yml)
+* [Spanish](src/Coduo/PHPHumanizer/Resources/translations/difference.es.yml)
+* [Ukrainian](src/Coduo/PHPHumanizer/Resources/translations/difference.uk.yml)
+* [Danish](src/Coduo/PHPHumanizer/Resources/translations/difference.da.yml)
+* [Thai](src/Coduo/PHPHumanizer/Resources/translations/difference.th.yml)
+* [Japanese](src/Coduo/PHPHumanizer/Resources/translations/difference.ja.yml)
+* [Romanian](src/Coduo/PHPHumanizer/Resources/translations/difference.ro.yml)
+
+# Development
+
+After downloading library update dependencies:
+
+```
+composer update
+```
+
+In order to check lowest possible versions of dependencies add 
+
+```
+composer update --prefer-lowest
+````
+
+Execute test suite:
+
+```
+composer run test
+```
+
+Run CS Fixer
+
+```
+composer run cs:php:fix
+```
+
 
 # Credits
 
